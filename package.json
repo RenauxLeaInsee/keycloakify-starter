@@ -9,6 +9,8 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
+        "predev": "react-dsfr update-icons",
+        "prebuild": "react-dsfr update-icons",
         "build": "tsc && vite build",
         "build-keycloak-theme": "npm run build && keycloakify build",
         "storybook": "storybook dev -p 6006",
@@ -17,12 +19,16 @@
     "license": "MIT",
     "keywords": [],
     "dependencies": {
+        "@codegouvfr/react-dsfr": "^1.11.7",
+        "@emotion/react": "^11.13.3",
+        "@emotion/styled": "^11.13.0",
+        "@mui/material": "^6.0.2",
         "keycloakify": "^10.0.5",
         "react": "^18.2.0",
-        "react-dom": "^18.2.0"
+        "react-dom": "^18.2.0",
+        "tss-react": "^4.9.13"
     },
     "devDependencies": {
-        "storybook": "^8.1.10",
         "@storybook/react": "^8.1.10",
         "@storybook/react-vite": "^8.1.10",
         "@types/react": "^18.2.43",
@@ -34,7 +40,8 @@
         "eslint-plugin-react-hooks": "^4.6.0",
         "eslint-plugin-react-refresh": "^0.4.5",
         "eslint-plugin-storybook": "^0.8.0",
-        "prettier": "3.3.1",
+        "prettier": "^3.3.3",
+        "storybook": "^8.1.10",
         "typescript": "^5.2.2",
         "vite": "^5.0.8"
     }
