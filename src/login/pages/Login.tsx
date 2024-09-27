@@ -25,8 +25,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
     const { classes, cx } = useStyles();
 
     return (
-        <>
-            <title>{`${msgStr("login")} - ${msgStr("serviceTagline")}`}</title>
+        <main>
             <Template
                 kcContext={kcContext}
                 i18n={i18n}
@@ -39,8 +38,8 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                     <div>
                         <h4>{msg("loginHelperTitle")}</h4>
                         <p>{msg("helperLoginDescription")}</p>
-                        <div>
-                            <p style={{ margin: 0 }}>{msg("helperLoginSupport")} </p>
+                        <p style={{ margin: 0 }}>
+                            {msgStr("helperLoginSupport")}
                             <Button
                                 style={{ padding: 0, display: "inline" }}
                                 priority="tertiary no outline"
@@ -49,9 +48,9 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                     href: "/assitance"
                                 }}
                             >
-                                {msg("contactSupportLink")}
+                                {msgStr("contactSupportLink")}
                             </Button>
-                        </div>
+                        </p>
                     </div>
                 }
             >
@@ -68,6 +67,14 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                 action={url.loginAction}
                                 method="post"
                             >
+                                {messagesPerField.existsError("username", "password") && (
+                                    <span
+                                        id="input-error"
+                                        className={kcClsx("kcInputErrorMessageClass")}
+                                        aria-live="polite"
+                                        dangerouslySetInnerHTML={{ __html: messagesPerField.getFirstError("username", "password") }}
+                                    />
+                                )}
                                 {!usernameHidden && (
                                     <div className={cx(kcClsx("kcFormGroupClass"), "fr-pb-3w")}>
                                         <Input
@@ -87,7 +94,6 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                             }}
                                             label={msgStr("identifier")}
                                             hintText={msgStr("identifierHint")}
-                                            state={messagesPerField.existsError("username", "password") ? "error" : "default"}
                                         />
                                     </div>
                                 )}
@@ -124,7 +130,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                     </div>
                 </div>
             </Template>
-        </>
+        </main>
     );
 }
 

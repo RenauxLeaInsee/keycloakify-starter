@@ -17,7 +17,10 @@ export const { useI18n, ofTypeI18n } = createUseI18n({
         contactSupportLink: "contact support.",
         homeLinkTitle: "Home - Response portal for official statistics surveys",
         serviceTagline: "Response portal for official statistics surveys",
-        operatorLogoAlt: "Insee, measure to understand"
+        operatorLogoAlt: "Insee, measure to understand",
+        "personal data": "Personal data",
+        cookies: "Cookies management",
+        "ssp logo alt": "Public statistics"
     },
     fr: {
         login: "Connexion",
@@ -37,7 +40,10 @@ export const { useI18n, ofTypeI18n } = createUseI18n({
         homeLinkTitle:
             "Accueil - Portail de réponse aux enquêtes de la statistique publique",
         serviceTagline: "Portail de réponse aux enquêtes de la statistique publique",
-        operatorLogoAlt: "Insee, mesurer pour comprendre"
+        operatorLogoAlt: "Insee, mesurer pour comprendre",
+        "personal data": "Données personnelles",
+        cookies: "Gestion des cookies",
+        "ssp logo alt": "Statistique publique"
     }
 });
 

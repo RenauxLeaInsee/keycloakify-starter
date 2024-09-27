@@ -15,6 +15,8 @@ import { fr } from "@codegouvfr/react-dsfr";
 import Footer from "@codegouvfr/react-dsfr/Footer";
 import { tss } from "../tss";
 import { Divider } from "@mui/material";
+import { Follow } from "@codegouvfr/react-dsfr/Follow";
+import { Breadcrumb } from "@codegouvfr/react-dsfr/Breadcrumb";
 
 export default function Template(props: TemplateProps<KcContext, I18n>) {
     const {
@@ -125,6 +127,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
     return (
         <div className={cx(css({ height: "100vh" }))}>
             <Header
+                className={classes.common}
                 brandTop={
                     <>
                         République
@@ -137,23 +140,6 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                     title: msgStr("homeLinkTitle"),
                     href: "/"
                 }}
-                quickAccessItems={[
-                    {
-                        iconId: "fr-icon-customer-service-fill",
-                        linkProps: {
-                            //   to: "/assistance",
-                        },
-                        text: msgStr("contactSupport")
-                    },
-                    {
-                        iconId: "fr-icon-account-circle-fill",
-                        linkProps: {
-                            className: fr.cx("fr-btn--tertiary", "fr-translate")
-                            //   to: "/connexion",
-                        },
-                        text: msgStr("logIn")
-                    }
-                ]}
                 serviceTitle={msgStr("serviceTagline")}
                 operatorLogo={{
                     alt: msgStr("operatorLogoAlt"),
@@ -161,6 +147,18 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                     orientation: "vertical"
                 }}
             />
+            <div className={classes.breadcrumb}>
+                <Breadcrumb
+                    className="fr-mb-0"
+                    currentPageLabel={msgStr("login")}
+                    homeLinkProps={{
+                        href: "/"
+                    }}
+                    // TODO: add survey url & name
+                    segments={[]}
+                />
+            </div>
+
             <div className={cx(classes.main)}>
                 <div className={cx(classes.card, "fr-py-md-7w", "fr-px-md-12w", "fr-px-2w", "fr-py-3w")}>
                     <header className={kcClsx("kcFormHeaderClass")}>
@@ -250,15 +248,54 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                     </div>
                 </div>
             </div>
+            <Follow
+                social={{
+                    buttons: [
+                        {
+                            linkProps: {
+                                href: "https://x.com/inseefr"
+                            },
+                            type: "twitter-x"
+                        }
+                    ]
+                }}
+            />
             <Footer
                 accessibility="non compliant"
-                // contentDescription={t("content description")}
-                // operatorLogo={{
-                //     alt: t("operator logo alt"),
-                //     imgUrl: logoInsee,
-                //     orientation: "vertical"
-                // }}
-                bottomItems={[headerFooterDisplayItem]}
+                className={classes.common}
+                id="footer"
+                operatorLogo={{
+                    alt: msgStr("operatorLogoAlt"),
+                    imgUrl: `${url.resourcesPath}/img/logo-insee.png`,
+                    orientation: "vertical"
+                }}
+                // TODO change link
+                termsLinkProps={{
+                    href: "/"
+                }}
+                domains={["insee.fr", "legifrance.gouv.fr", "service-public.fr", "cnil.fr"]}
+                // TODO: change links
+                bottomItems={[
+                    {
+                        text: msgStr("personal data"),
+                        linkProps: {
+                            href: "/"
+                        }
+                    },
+                    {
+                        text: msgStr("cookies"),
+                        linkProps: {
+                            href: "/"
+                        }
+                    },
+                    headerFooterDisplayItem
+                ]}
+                partnersLogos={{
+                    main: {
+                        alt: msgStr("ssp logo alt"),
+                        imgUrl: `${url.resourcesPath}/img/logo-ssp.jpg`
+                    }
+                }}
             />
         </div>
     );
@@ -304,10 +341,35 @@ const useStyles = tss.create(({ breakpointsValues, windowInnerWidth }) => ({
             }
 
             if (windowInnerWidth < breakpointsValues.xl) {
-                return "80vw";
+                return "90vw";
             }
 
-            return "80vw";
+            return "90vw";
+        })()
+    },
+    common: {
+        ".fr-container": {
+            maxWidth: (() => {
+                if (windowInnerWidth < breakpointsValues.xl) {
+                    return "100vw";
+                }
+
+                return "90vw";
+            })(),
+            ".fr-header__brand-top": {
+                overflow: "initial"
+            },
+            ".fr-footer__partners-logos": {
+                paddingLeft: fr.spacing("3w")
+            }
+        }
+    },
+    breadcrumb: {
+        paddingLeft: (() => {
+            if (windowInnerWidth < breakpointsValues.xl) {
+                return fr.spacing("3w");
+            }
+            return "6.5vw";
         })()
     }
 }));
